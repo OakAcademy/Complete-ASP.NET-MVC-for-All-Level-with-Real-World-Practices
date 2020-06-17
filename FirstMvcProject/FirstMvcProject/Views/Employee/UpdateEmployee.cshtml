@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "UpdateEmployee";
+    Layout = "~/Views/Shared/EmployeeLayout.cshtml";
+}
+<h2>UpdateEmployee</h2>
+@using (Html.BeginForm("UpdateEmployee", "Employee", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.Partial("~/Views/Employee/Partial/EmployeeForm.cshtml")
+}

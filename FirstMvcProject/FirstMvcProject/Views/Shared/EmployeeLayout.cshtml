@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@Page.Title</title>
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <header>
+        <p>Layout Head</p>
+    </header>
+    @RenderBody()
+    @RenderSection("scripts",required:false)
+    <p>
+        layout footer
+    </p>
+</body>
+</html>

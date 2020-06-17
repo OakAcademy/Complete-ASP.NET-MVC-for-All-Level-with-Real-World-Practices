@@ -1,0 +1,18 @@
+﻿@model FirstMvcProject.Models.Employee
+@Html.LabelFor(x => x.ID)
+@Html.TextBoxFor(x => x.ID)
+@Html.ValidationMessageFor(x => x.ID)
+
+<br />
+<label>Name</label>
+@Html.TextBoxFor(x => x.Name)
+
+@Html.ValidationMessageFor(x => x.Name)
+
+<br />
+<label>Salary</label>
+@Html.TextBoxFor(x => x.Salary)
+
+@Html.ValidationMessageFor(x => x.Salary)
+<br />
+<button type="submit">Save</button>
