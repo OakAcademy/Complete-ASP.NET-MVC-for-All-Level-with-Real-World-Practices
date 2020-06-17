@@ -1,0 +1,473 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>OAK</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <!-- Ionicons -->
+    <link href="~/Areas/Admin/Content/CSS/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- overlayScrollbars -->
+
+    <link href="~/Areas/Admin/Content/CSS/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/CSS/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="~/Areas/Admin/Content/CSS/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/CSS/adminlte.min.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+    @using DTO
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <!-- SEARCH FORM -->
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item ">
+                    <a class="nav-link"  href="/Admin/Comment/UnapprovedComments">
+                        <i class="far fa-comments"></i>
+                        <span class="badge badge-danger navbar-badge" id="CommentCount"></span>
+                    </a>
+
+                </li>
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item ">
+                    <a class="nav-link"  href="/Admin/Contact/UnreadMessages">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge" id="MessageCount"></span>
+                    </a>
+                  
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="@Url.RouteUrl("Home")" class="brand-link">
+                <img src="~/Areas/Admin/Content/tempimage/logo.png"
+                     alt="AdminLTE Logo"
+                     class="brand-image img-circle elevation-3"
+                     style="opacity: .8">
+                <span class="brand-text font-weight-light">OAK Academy</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="~/Areas/Admin/Content/UserImage/@UserStatic.Imagepath" class="img-circle elevation-2" alt="User Image">
+
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">@UserStatic.Namesurname</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Site Settings
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/Fav/UpdateFav" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Fav Icon Logo Title</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/Meta/MetaList" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Meta List</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/Meta/AddMeta" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Meta</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Address
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/Address/AddressList" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Address list</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/Address/AddAddress" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Address</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Social Media
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/SocialMedia/SocialMediaList" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Social Media list</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/SocialMedia/AddSocialMedia" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Social Media</p>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Ads
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/Ads/AdsList" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ads list</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/Ads/AddAds" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Ads</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Category
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/Category/CategoryList" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Category list</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/Category/AddCategory" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Category</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Posts
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/Post/PostList" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Post list</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/Post/AddPost" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Post</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Videos
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/Video/VideoList" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Video list</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/Video/AddVideo" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Video</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Comments
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/Comment/AllComments" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>All Comments </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/Comment/UnapprovedComments" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Unapproved Comments </p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Messages
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/Contact/AllMessages" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>All Messages </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Admin/COntact/UnreadMessages" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Unread Messages </p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Log
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/Log/LogList" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Log List </p>
+                                    </a>
+                                </li>
+                               
+
+                            </ul>
+                        </li>
+
+
+                        @if (UserStatic.isAdmin)
+                        {
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        User
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/Admin/User/UserList" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>User list</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Admin/User/AddUser" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Add User</p>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        User
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/Admin/User/UpdateUser/@UserStatic.UserID" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Update User</p>
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <!-- Main content -->
+
+            @RenderBody()
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+
+            </div>
+            <strong>Copyright &copy; 2020 <a href="https://oakacademy.uk/">OAK Academy</a>.</strong> All rights
+            reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <!-- Bootstrap 4 -->
+    <script src="~/Areas/Admin/Content/JS/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Content/JS/bootstrap.bundle.min.js"></script>
+    <script src="~/Areas/Admin/Content/JS/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Admin/Content/JS/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Areas/Admin/Content/JS/dataTables.responsive.min.js"></script>
+    <script src="~/Areas/Admin/Content/JS/responsive.bootstrap4.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Areas/Admin/Content/JS/sweetalert2.min.js"></script>
+    <script src="~/Areas/Admin/Content/JS/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Areas/Admin/Content/JS/demo.js"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "ordering": false,
+            });
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            GetCounts();
+        });
+    </script>
+    <script type="text/javascript">
+        setInterval(function () {
+            GetCounts();
+        },10000
+        )
+
+    </script>
+   <script type="text/javascript">
+       $(document).ready(function () { });
+       function GetCounts() {
+           $.ajax({
+               url: "@Url.Action("GetCounts","Post")",
+               type: "POST",
+               success: function (result) {
+                   $("#CommentCount").html(result.CommentCount);
+                   $("#MessageCount").html(result.MessageCount);
+               }
+
+           });
+       }
+
+   </script>
+
+</body>
+</html>

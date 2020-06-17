@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "UpdateCategory";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+<section class="content-header">
+
+    <h1>Update Category</h1>
+    <ol class=" breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>Category</a></li>
+        <li class="breadcrumb-item active"><a>Update Category</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <button type="submit" class="btn btn-primary" onclick="window.location.href='/Admin/Category/CategoryList'">Category List</button>
+</div>
+<section class="content">
+    <div class="row">
+        <div class="col-md-9">
+            @Html.Partial("~/Areas/Admin/Views/Shared/MessageForm.cshtml")
+            <div class="box box-primary">
+                @using (Html.BeginForm("UpdateCategory", "Category", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    @Html.Partial("Partial/CategoryForm")
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+

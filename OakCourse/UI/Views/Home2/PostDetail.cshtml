@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = "PostDetail";
+    Layout = "~/Views/Shared/HomeLayout2.cshtml";
+}
+
+@model DTO.GeneralDTO
+
+
+<!-- ##### Post Details Area Start ##### -->
+<section class="post-details-area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Post Details Content Area -->
+            <div class="col-12 col-xl-8">
+
+                <div class="sports-videos-slides owl-carousel mb-30">
+                    <!-- Single Featured Post -->
+                    @foreach (var item in Model.PostDetail.PostImages)
+                    {
+                        <div class="single-featured-post">
+                            <!-- Thumbnail -->
+                            <div class="post-thumbnail mb-50">
+                                <img src="~/Areas/Admin/Content/PostImage/@item.ImagePath" alt="">
+                            </div>
+                            <!-- Post Contetnt -->
+                            <!-- Post Share Area -->
+
+                        </div>
+                    }
+
+
+
+
+                </div>
+
+
+
+                <div class="post-details-content bg-white mb-30 p-30 box-shadow">
+                    <div class="blog-thumb mb-30">
+                       
+                    </div>
+                    <div class="blog-content">
+                        <div class="post-meta">
+                            <a href="#">@Model.PostDetail.AddDate.ToString("dd.MM.yyyy dddd")</a>
+                            <a href="@Url.RouteUrl("Category",new { @CategoryName=BLL.SeoLink.GenerateUrl(Model.PostDetail.CategoryName)})">@Model.PostDetail.CategoryName</a>
+                        </div>
+                        <h4 class="post-title">@Model.PostDetail.Title</h4>
+                        <!-- Post Meta -->
+                        <div class="post-meta-2">
+                            <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> @Model.PostDetail.ViewCount</a>
+                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> @Model.PostDetail.CommentCount</a>
+                        </div>
+
+                       @Html.Raw(Model.PostDetail.PostContent)
+                        <!-- Like Dislike Share -->
+                        <div class="like-dislike-share my-5">
+                            <h4 class="share">240<span>Share</span></h4>
+                            <a href="http://www.facebook.com/sharer.php?s=100&p[url]=https://oakacademy.uk/&p[title]=@Model.PostDetail.Title&p[summary]=@Model.PostDetail.ShortContent" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Share on Facebook</a>
+                            <a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Share on Twitter</a>
+                        </div>
+
+                        <!-- Post Author -->
+                        
+                    </div>
+                </div>
+
+                <!-- Related Post Area -->
+                <div class="post-thumbnail mb-50">
+                    <a href="@Model.Adslist[1].Link" target="_blank"> <img src="~/Areas/Admin/Content/AdsImage/@Model.Adslist[1].ImagePath" /></a>
+                </div>
+
+                <!-- Comment Area Start -->
+                <div class="comment_area clearfix bg-white mb-30 p-30 box-shadow">
+                    <!-- Section Title -->
+                    <div class="section-heading">
+                        <h5>COMMENTS</h5>
+                    </div>
+
+                    <ol>
+                        @foreach (var item in Model.PostDetail.CommentList)
+                        {
+                        <li class="single_comment_area">
+                            <!-- Comment Content -->
+                            <div class="comment-content d-flex">
+                                <!-- Comment Author -->
+                                
+                                <!-- Comment Meta -->
+                                <div class="comment-meta">
+                                    <a href="#" class="comment-date">@item.AddDate.ToString("dd.MM.yyyy dddd")</a>
+                                    <h6>@item.Name</h6>
+                                    <p>@item.CommentContent</p>
+                                   
+                                </div>
+                            </div>
+
+                            
+                        </li>
+                        }
+                        <!-- Single Comment Area -->
+                        
+
+                        <!-- Single Comment Area -->
+                        
+                    </ol>
+                </div>
+
+                <!-- Post A Comment Area -->
+                <div class="post-a-comment-area bg-white mb-30 p-30 box-shadow clearfix">
+                    <!-- Section Title -->
+                    <div class="section-heading">
+                        <h5>LEAVE A REPLY</h5>
+                    </div>
+
+                    <!-- Reply Form -->
+                    <div class="contact-form-area">
+                        <form action="#" method="post">
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <input type="text" name="Name" class="form-control" id="name" placeholder="Your Name*" required>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <input type="email" class="form-control" id="email" name="Email" placeholder="Your Email*" required>
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="Message" class="form-control" id="message" cols="30" rows="10" placeholder="Message*" required></textarea>
+                                </div>
+                                <input hidden value="@Model.PostDetail.ID" name="PostID"/>
+                                <div class="col-12">
+                                    <button class="btn mag-btn mt-30" type="submit">Submit Comment</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Widget -->
+            <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+                <div class="sidebar-area bg-white mb-30 box-shadow">
+                    <!-- Sidebar Widget -->
+                    <div class="single-sidebar-widget p-30">
+                        <div class="single-sidebar-widget p-30">
+                            <!-- Section Title -->
+                            <div class="section-heading">
+                                <h5>Breaking Trainings</h5>
+                            </div>
+                            @foreach (var item in Model.BreakingPost)
+                            {
+                                <div class="single-blog-post d-flex">
+                                    <div class="post-thumbnail">
+                                        <a href="@Url.RouteUrl("PostDetail",new { @ID=item.ID, @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName), @SeoLink=item.SeoLink})">
+                                            <img src="~/Areas/Admin/Content/PostImage/@item.ImagePath" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="post-content">
+                                        <a href="@Url.RouteUrl("PostDetail",new { @ID=item.ID, @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName), @SeoLink=item.SeoLink})" class="post-title">@item.Title</a>
+                                        <div class="post-meta d-flex justify-content-between">
+                                            <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> @item.ViewCount</a>
+                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> @item.CommentCount</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <!-- Single Blog Post -->
+                            <!-- Single Blog Post -->
+
+
+                        </div>
+
+
+                        <!-- Social Followers Info -->
+
+                    </div>
+
+                    <div class="single-sidebar-widget p-30">
+                        <a href="@Model.Adslist[0].Link" target="_blank"> <img src="~/Areas/Admin/Content/AdsImage/@Model.Adslist[0].ImagePath" /></a>
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Post Details Area End ##### -->

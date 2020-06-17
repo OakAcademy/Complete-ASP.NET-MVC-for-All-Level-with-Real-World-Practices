@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "AddPost";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+
+<section class="content-header">
+
+    <h1>Add Post</h1>
+    <ol class=" breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>Post</a></li>
+        <li class="breadcrumb-item active"><a>Add Post</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <button type="submit" class="btn btn-primary" onclick="window.location.href='/Admin/Post/PostList'">Post List</button>
+</div>
+<section class="content">
+    <div class="row">
+        <div class="col-md-9">
+            @Html.Partial("~/Areas/Admin/Views/Shared/MessageForm.cshtml")
+            <script src="~/Areas/Admin/Content/JS/ckeditor/ckeditor.js"></script>
+            <div class="box box-primary">
+                @using (Html.BeginForm("AddPost", "Post", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    @Html.Partial("Partial/PostForm")
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/HomeLayout2.cshtml";
+}
+
+@model DTO.GeneralDTO
+
+<!-- ##### Hero Area Start ##### -->
+<div class="hero-area owl-carousel">
+    @foreach (var item in Model.SliderPost)
+    {
+        <div class="hero-blog-post bg-img bg-overlay" style="background-image: url(/Areas/Admin/Content/PostImage/@item.ImagePath);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <!-- Post Contetnt -->
+                        <div class="post-content text-center">
+                            <div class="post-meta" data-animation="fadeInUp" data-delay="100ms">
+                                <a href="#">@item.AddDate.ToString("dd.MM.yyyy dddd")</a>
+                                <a href="@Url.RouteUrl("Category",new { @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName)})">@item.CategoryName</a>
+                            </div>
+                            <a href="@Url.RouteUrl("PostDetail",new { @ID=item.ID, @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName), @SeoLink=item.SeoLink})" class="post-title" data-animation="fadeInUp" data-delay="300ms">@item.Title</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Single Blog Post -->
+
+
+</div>
+<!-- ##### Hero Area End ##### -->
+<!-- ##### Mag Posts Area Start ##### -->
+<section class="mag-posts-area d-flex flex-wrap">
+
+    <!-- >>>>>>>>>>>>>>>>>>>>
+     Post Left Sidebar Area
+    <<<<<<<<<<<<<<<<<<<<< -->
+    <div class="post-sidebar-area left-sidebar mt-30 mb-30 bg-white box-shadow">
+        <!-- Sidebar Widget -->
+        <div class="single-sidebar-widget">
+            <a href="@Model.Adslist[2].Link" class="add-img"><img src="~/Areas/Admin/Content/AdsImage/@Model.Adslist[2].ImagePath" alt=""></a>
+        </div>
+        <br />
+        <div class="social-followers-info">
+            <!-- Facebook -->
+            <a href="#" class="facebook-fans"><i class="fa fa-facebook"></i> 4,360 <span>Fans</span></a>
+            <!-- Twitter -->
+            <a href="#" class="twitter-followers"><i class="fa fa-twitter"></i> 3,280 <span>Followers</span></a>
+            <!-- YouTube -->
+            <a href="#" class="youtube-subscribers"><i class="fa fa-youtube"></i> 1250 <span>Subscribers</span></a>
+            <!-- Google -->
+            <a href="#" class="google-followers"><i class="fa fa-google-plus"></i> 4,230 <span>Followers</span></a>
+        </div>
+
+
+
+        <!-- Sidebar Widget -->
+        <!-- Sidebar Widget -->
+
+    </div>
+
+    <!-- >>>>>>>>>>>>>>>>>>>>
+         Main Posts Area
+    <<<<<<<<<<<<<<<<<<<<< -->
+    <div class="mag-posts-content mt-30 mb-30 p-30 box-shadow">
+        <!-- Trending Now Posts Area -->
+        <div class="trending-now-posts mb-30">
+            <!-- Section Title -->
+            <div class="section-heading">
+                <h5>TRENDING Trainings</h5>
+            </div>
+
+            <div class="trending-post-slides owl-carousel">
+                <!-- Single Trending Post -->
+                @foreach (var item in Model.PopularPost)
+                {
+                    <div class="post-thumbnail">
+                        <a href="@Url.RouteUrl("PostDetail",new { @ID=item.ID, @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName), @SeoLink=item.SeoLink})">
+                            <img src="~/Areas/Admin/Content/PostImage/@item.ImagePath" alt="">
+                        </a>
+                        <div class="post-content">
+                            <a href="@Url.RouteUrl("Category",new { @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName)})" class="post-cata">@item.CategoryName</a>
+                            <a href="@Url.RouteUrl("PostDetail",new { @ID=item.ID, @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName), @SeoLink=item.SeoLink})" class="post-title">@item.Title</a>
+                        </div>
+                    </div>
+                }
+
+
+
+            </div>
+        </div>
+
+        <!-- Feature Video Posts Area -->
+        <!-- Most Viewed Videos -->
+        <div class="most-viewed-videos mb-30">
+            <!-- Section Title -->
+            <div class="section-heading">
+                <h5>Most Viewed Videos</h5>
+            </div>
+
+            <div class="most-viewed-videos-slide owl-carousel">
+                @foreach (var item in Model.MostViewedPost)
+                {
+                    <div class="single-blog-post style-4">
+                        <div class="post-thumbnail">
+                            <a href="@Url.RouteUrl("PostDetail",new { @ID=item.ID, @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName), @SeoLink=item.SeoLink})">
+                                <img src="~/Areas/Admin/Content/PostImage/@item.ImagePath" alt="">
+                            </a>
+                        </div>
+                        <div class="post-content">
+                            <a href="@Url.RouteUrl("PostDetail",new { @ID=item.ID, @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName), @SeoLink=item.SeoLink})" class="post-title">@item.Title</a>
+                            <div class="post-meta d-flex">
+                                <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> @item.ViewCount</a>
+                                <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> @item.CommentCount</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="post-thumbnail mb-50">
+                <a href="@Model.Adslist[1].Link" class="add-img"><img src="~/Areas/Admin/Content/AdsImage/@Model.Adslist[1].ImagePath" width="100%" alt=""></a>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- >>>>>>>>>>>>>>>>>>>>
+     Post Right Sidebar Area
+    <<<<<<<<<<<<<<<<<<<<< -->
+    <div class="post-sidebar-area right-sidebar mt-30 mb-30 box-shadow">
+        <!-- Sidebar Widget -->
+        <div class="single-sidebar-widget p-30">
+            <div class="single-sidebar-widget p-30">
+                <!-- Section Title -->
+                <div class="section-heading">
+                    <h5>Breaking Trainings</h5>
+                </div>
+                @foreach (var item in Model.BreakingPost)
+                {
+                    <div class="single-blog-post d-flex">
+                        <div class="post-thumbnail">
+                            <a href="@Url.RouteUrl("PostDetail",new { @ID=item.ID, @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName), @SeoLink=item.SeoLink})">
+                                <img src="~/Areas/Admin/Content/PostImage/@item.ImagePath" alt="">
+                            </a>
+                        </div>
+                        <div class="post-content">
+                            <a href="@Url.RouteUrl("PostDetail",new { @ID=item.ID, @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName), @SeoLink=item.SeoLink})" class="post-title">@item.Title</a>
+                            <div class="post-meta d-flex justify-content-between">
+                                <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> @item.ViewCount</a>
+                                <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> @item.CommentCount</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- Single Blog Post -->
+                <!-- Single Blog Post -->
+
+
+            </div>
+
+
+            <!-- Social Followers Info -->
+
+        </div>
+    </div>
+</section>
+
+<!-- Related Post Area -->
+<div class="related-post-area bg-white mb-30 px-30 pt-30 pb-0 box-shadow">
+    <!-- Section Title -->
+    <div class="section-heading">
+        <h5>Related Post</h5>
+    </div>
+
+    <div class="row">
+        <!-- Single Blog Post -->
+        @foreach (var item in Model.Videos)
+        {
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="single-blog-post style-4 mb-30">
+                <div class="post-thumbnail">
+                    @Html.Raw(item.VideoPath)
+                </div>
+                <div class="post-content">
+                    <a href="@item.OriginalVideoPath" class="post-title">@item.Title</a>
+                  
+                </div>
+            </div>
+        </div>
+        }
+        
+
+
+    </div>
+</div>
+
+<!-- Comment Area Start -->
+<!-- ##### Mag Posts Area End ##### -->

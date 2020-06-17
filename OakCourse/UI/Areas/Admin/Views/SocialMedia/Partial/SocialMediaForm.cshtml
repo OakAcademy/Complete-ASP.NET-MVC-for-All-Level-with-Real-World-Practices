@@ -1,0 +1,38 @@
+﻿
+@model DTO.SocialMediaDTO
+    <div class="box-body">
+
+     <div class="form-group">
+         <label>Name</label>
+         @Html.TextBoxFor(x=>x.Name,new { @class="form-control",@placeholder="Social Media Name"})
+         @Html.ValidationMessageFor(x=>x.Name)
+     </div>
+        <div class="form-group">
+            <label>Link</label>
+            @Html.TextBoxFor(x=>x.Link,new  {@class="form-control",@placeholder="Social Media Link" })
+            @Html.ValidationMessageFor(x=>x.Link)
+        </div>
+        <input hidden type="number" value="@Model.ID" name="ID"/>
+        <div class="form-group">
+            @Html.LabelFor(x => x.SocialImage)
+            <input type="file" name="SocialImage" accept="image/gif, image/jpeg,image/png, image/jpg"
+                   onchange="$('#SocialImage')[0].src = window.URL.createObjectURL(this.files[0])" />
+            <br />
+            @if (Model != null && Model.ImagePath != null)
+            {
+                <br />
+                <img src="~/Areas/Admin/Content/SocialMediaImages/@Model.ImagePath" width="300" height="200" />
+            }
+            else
+            {
+                <img src="" width="300" height="200" id="SocialImage" />
+            }
+
+          
+
+        </div>
+        <div class="card-footer">
+            <button class=" btn btn-primary">Save</button>
+        </div>
+
+    </div>

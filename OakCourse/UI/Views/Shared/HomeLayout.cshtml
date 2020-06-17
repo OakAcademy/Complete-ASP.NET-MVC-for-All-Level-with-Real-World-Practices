@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@using DTO
+@{ 
+    var layoutdto = (HomeLayoutDTO)ViewData["LayoutDTO"];
+    List<CategoryDTO> categories = layoutdto.Categories;
+    FavDTO favdto = layoutdto.FavDTO;
+    List<MetaDTO> metalist = layoutdto.Metalist;
+    AddressDTO address = layoutdto.Address;
+    List<PostDTO> hotnews = layoutdto.HotNews;
+
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @foreach (var item in metalist)
+    {
+
+        <meta name="@item.Name" content="@item.MetaContent">
+    }
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>@favdto.Title</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/Areas/Admin/Content/FavImage/@favdto.Fav">
+
+    <!-- Stylesheet -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+</head>
+
+<body>
+
+
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-6">
+                        <!-- Breaking News Widget -->
+                        <div class="breaking-news-area d-flex align-items-center">
+                            <div class="news-title">
+                                <p>Hot Trainings:</p>
+                            </div>
+                            <div id="breakingNewsTicker" class="ticker">
+                                <ul>
+                                    @foreach (var item in hotnews)
+                                    {
+
+                                        <li><a href="@Url.RouteUrl("PostDetail",new { @ID=item.ID, @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName), @SeoLink=item.SeoLink})">@item.Title</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="top-meta-data d-flex align-items-center justify-content-end">
+                            <!-- Top Social Info -->
+                            <div class="top-social-info">
+                                <a href="@layoutdto.Facebook.Link" target="_blank"><i class="fa fa-facebook"></i></a>
+                                <a href="@layoutdto.Twitter.Link" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a href="@layoutdto.Instagram.Link" target="_blank"><i class="fa fa-instagram"></i></a>
+                                <a href="@layoutdto.Linkedin.Link" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                <a href="@layoutdto.Youtube.Link" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                            </div>
+                            <!-- Top Search Area -->
+                            <div class="top-search-area">
+                                <form action="/search" method="post">
+                                    <input type="search" name="SearchText" id="topSearch" placeholder="Search...">
+                                    <button type="submit" class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </form>
+                            </div>
+                            <!-- Login -->
+                            <a href="/Admin/Login/Index" class="login-btn"><i class="fa fa-user" aria-hidden="true"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="vizew-main-menu" id="sticker">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="vizewNav">
+
+                        <!-- Nav brand -->
+                        <a href="@Url.RouteUrl("Home")" class="nav-brand"><img src="~/Areas/Admin/Content/FavImage/@favdto.Logo" width="100" height="80" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+
+                                    @foreach (var item in categories)
+                                    {
+
+                                        <li><a href="@Url.RouteUrl("Category",new { @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName)})">@item.CategoryName</a></li>
+                                    }
+                                    <li><a href="@Url.RouteUrl("Category",new { @CategoryName="video"})">Videos</a></li>
+                                    <li><a href="/contactus">Contact</a></li>
+
+
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+    <!-- ##### Hero Area Start ##### -->
+    @RenderBody()
+
+    <!-- ##### Hero Area End ##### -->
+    <!-- ##### Trending Posts Area Start ##### -->
+    <!-- ##### Trending Posts Area End ##### -->
+    <!-- ##### Vizew Post Area Start ##### -->
+    <!-- ##### Vizew Psot Area End ##### -->
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+                        <!-- Logo -->
+                        <a href="@Url.RouteUrl("Home")" class="foo-logo d-block mb-4"><img src="~/Areas/Admin/Content/FavImage/@favdto.Logo" alt=""></a>
+
+
+                    </div>
+                </div>
+
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+                        <h6 class="widget-title">Quick Access</h6>
+                        <!-- Twitter Slides -->
+                        <div class="twitter-slides owl-carousel">
+
+                            <!-- Single Twitter Slide -->
+                            <div class="single--twitter-slide">
+                                @foreach (var item in categories)
+                                {
+                                    <div class="single-twit">
+                                        <a href="@Url.RouteUrl("Category",new { @CategoryName=BLL.SeoLink.GenerateUrl(item.CategoryName)})"><p><i class="fa fa-star"></i>@item.CategoryName </p></a>
+                                    </div>
+                                }
+                                <div class="single-twit">
+                                    <a href="@Url.RouteUrl("Category",new { @CategoryName="video"})"><p><i class="fa fa-star"></i>Videos </p></a>
+                                </div>
+                                <div class="single-twit">
+                                    <a href="/contactus"><p><i class="fa fa-star"></i>Contact </p></a>
+                                </div>
+                                <div class="single-twit">
+                                    <a href="http://new.mvctechnologymania.com/"><p><i class="fa fa-star"></i>Change Template </p></a>
+                                </div>
+                                <!-- Single Twit -->
+                                <!-- Single Twit -->
+
+                            </div>
+
+                            <!-- Single Twitter Slide -->
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Widget Area -->
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+                        <h6 class="widget-title">Our Address</h6>
+                        <!-- Contact Address -->
+                        <div class="contact-address">
+                            <p>@address.AddressContent</p><br />
+                            <p>Phone: @address.Phone</p><br />
+                            <p>Fax:@address.Fax</p><br />
+                            <p>Email:@address.Email</p>
+                        </div>
+                        <!-- Footer Social Area -->
+                        <div class="footer-social-area">
+                            <a href="@layoutdto.Facebook.Link" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="@layoutdto.Twitter.Link" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="@layoutdto.Instagram.Link" target="_blank" class="instagram"><i class="fa fa-instagram"></i></a>
+                            <a href="@layoutdto.Youtube.Link" target="_blank" class="youtube"><i class="fa fa-youtube"></i></a>
+                            <a href="@layoutdto.Linkedin.Link" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+                        @Html.Raw(address.SmallMapPath)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copywrite Area -->
+        <div class="copywrite-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Copywrite Text -->
+                    <div class="col-12 col-sm-6">
+                        <p class="copywrite-text">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <nav class="footer-nav">
+                            <ul>
+                                <li><a href="#">Advertise</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Disclaimer</a></li>
+                                <li><a href="#">Privacy</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="~/Content/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="~/Content/js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="~/Content/js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="~/Content/js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="~/Content/js/active.js"></script>
+
+    <script src="~/Content/toastr/toastr.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var result = "@ViewData["CommentState"]";
+            if (result != "") {
+                if (result == "Success")
+                    toastr.success(result);
+                else
+                    toastr.error(result);
+
+
+
+            }
+
+        });
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "AllComments";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+@model List<DTO.CommentDTO>
+<section class="content-header">
+
+    <h1>All Comments</h1>
+    <ol class=" breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>COmment</a></li>
+        <li class="breadcrumb-item active"><a>All Comments list</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <button type="submit" class="btn btn-primary" onclick="window.location.href='/Admin/COmment/UnapprovedCOmments'">Unapproved Comments</button>
+</div>
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">DataTable with default features</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Post Title</th>
+                    <th>Comment Content</th>
+                    <th>Email</th>
+                    <th>Add Date</th>
+                    <th>Approve</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tbody>
+
+                    <tr id="a_@item.ID">
+
+                        <td>
+                            @item.PostTitle
+                        </td>
+                        <td>
+                            @item.CommentContent
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.AddDate.ToString("dd.MM.yyyy")
+                        </td>
+                        @if (!item.isApproved)
+                        {
+                            <td align="center" valign="middle">
+                                <a href="/Admin/Comment/ApproveComment2/@item.ID">
+                                    <br />
+                                    <img src="~/Areas/Admin/Content/icons/approve.png" />
+                                </a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                Approved
+                            </td>
+                        }
+                        <td align="center" valign="middle">
+                            <a href="/Admin/Comment/ApproveComment/@item.ID">
+                                <br />
+                                <img src="~/Areas/Admin/Content/icons/approve.png" />
+                            </a>
+                        </td>
+                        <td align="center" valign="middle">
+                            <a href="#">
+                                <br />
+                                <img src="~/Areas/Admin/Content/icons/delete-16.ico" onclick="AskQuestion('/Admin/Comment/DeleteComment/',@item.ID)" />
+                            </a>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            }
+
+            <tfoot>
+                <tr>
+                    <th>Post Title</th>
+                    <th>Comment Content</th>
+                    <th>Email</th>
+                    <th>Add Date</th>
+                    <th>Approve</th>
+                    <th>Delete</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    @Html.Partial("~/Areas/Admin/Views/Shared/ModalMessage.cshtml")
+    <!-- /.card-body -->
+</div>
+<script src="~/Areas/Admin/Content/JS/DeleteRecord.js"></script>
+<!-- /.card --
+
+
+
+

@@ -1,0 +1,20 @@
+﻿
+@model DTO.VideoDTO
+    <div class="box-body">
+        <div class="form-group">
+            <label>Title</label>
+            @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Title" })
+            @Html.ValidationMessageFor(x => x.Title)
+
+        </div>
+        <div class="form-group">
+            <label>Video Path</label>
+            @Html.TextBoxFor(x => x.OriginalVideoPath, new { @class = "form-control", @placeholder = "Video Path" })
+            @Html.ValidationMessageFor(x => x.OriginalVideoPath)
+
+        </div>
+        <input type="number" hidden value="@Model.ID" name="ID"/>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>

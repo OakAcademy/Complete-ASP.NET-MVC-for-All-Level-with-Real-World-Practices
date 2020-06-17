@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "UpdateMeta";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+<section class="content-header">
+
+    <h1>Update Meta operation</h1>
+    <ol class=" breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>Meta</a></li>
+        <li class="breadcrumb-item active"><a>Update Meta</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <button type="submit" class="btn btn-primary" onclick="window.location.href='/Admin/Meta/MetaList'">Meta List</button>
+</div>
+<section class="content">
+    <div class="row">
+        <div class="col-md-9">
+            @Html.Partial("~/Areas/Admin/Views/Shared/MessageForm.cshtml")
+            <div class="box box-primary">
+                @using (Html.BeginForm("UpdateMeta", "Meta", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    @Html.Partial("Partial/MetaForm")
+                }
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "SocialMediaList";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+@model List<DTO.SocialMediaDTO>
+<section class="content-header">
+
+    <h1>Meta List</h1>
+    <ol class=" breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>Social Media</a></li>
+        <li class="breadcrumb-item active"><a>Social Media List</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <button type="submit" class="btn btn-primary" onclick="window.location.href='/Admin/SocialMedia/AddSocialMedia'">Add Social Media</button>
+</div>
+
+
+<div class="card">
+
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Link</th>
+                    <th>Image</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tbody>
+
+                    <tr id="a_@item.ID">
+                        <td>@item.Name</td>
+                        <td>
+                            @item.Link
+                        </td>
+                        <td>
+                            <img src="~/Areas/Admin/Content/SocialMediaImages/@item.ImagePath" width="60" height="40" />
+
+                        </td>
+                        <td align="center" valign="middle">
+                            <a href="/Admin/SocialMedia/UpdateSocialMedia/@item.ID">
+                                <br />
+                                <img src="~/Areas/Admin/Content/icons/updates-16.ico" />
+                            </a>
+                        </td>
+                        <td align="center" valign="middle">
+                            <a href="#">
+                                <br />
+                                <img src="~/Areas/Admin/Content/icons/delete-16.ico" onclick="AskQuestion('/Admin/SocialMedia/DeleteSocialMedia/',@item.ID)" />
+                            </a>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            }
+
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Meta Content</th>
+                    <th>Image</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    @Html.Partial("~/Areas/Admin/Views/Shared/ModalMessage.cshtml")
+    <!-- /.card-body -->
+</div>
+<script src="~/Areas/Admin/Content/JS/DeleteRecord.js"></script>
+<!-- /.card -->

@@ -1,0 +1,14 @@
+﻿
+@model DTO.CategoryDTO
+    <div class="box-body">
+        <div class="form-group">
+            <label> Category Name</label>
+            @Html.TextBoxFor(x=>x.CategoryName,new {@class="form-control",@placeholder="Category Name" })
+            @Html.ValidationMessageFor(x=>x.CategoryName)
+        </div>
+        <input type="number" hidden value="@Model.ID" name="ID" />
+        <div class="card-footer">
+            <button class="btn btn-primary" type="submit"> Save</button>
+        </div>
+
+    </div>

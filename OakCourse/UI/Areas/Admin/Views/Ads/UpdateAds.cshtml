@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "UpdateAds";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+<section class="content-header">
+
+    <h1>Update Ads</h1>
+    <ol class=" breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>Ads</a></li>
+        <li class="breadcrumb-item active"><a>Update Ads</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <button type="submit" class="btn btn-primary" onclick="window.location.href='/Admin/Ads/AdsList'">Ads List</button>
+</div>
+<section class="content">
+    <div class="row">
+        <div class="col-md-9">
+            @Html.Partial("~/Areas/Admin/Views/Shared/MessageForm.cshtml")
+            <div class="box box-primary">
+                @using (Html.BeginForm("UpdateAds", "Ads", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    @Html.Partial("Partial/AdsForm")
+                }
+            </div>
+        </div>
+    </div>
+</section>
